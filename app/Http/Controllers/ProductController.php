@@ -28,7 +28,7 @@ class ProductController extends Controller {
   }
 
   public function getImgSrc() {
-    return 'http://itemku.productapi/img/';
+    return $this->productAPI.'img/';
   }
 
   public function generateForm($request, $patch = false) {
