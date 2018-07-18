@@ -12,6 +12,7 @@ class UserController extends Controller {
 
   public function __construct() {
     $this->userAPI = 'http://itemku.userapi/';
+    $this->productAPI = 'http://itemku.productnonspa/';
   }
 
   public function profile() {
@@ -41,7 +42,7 @@ class UserController extends Controller {
     $query = http_build_query([
       'response_type' => 'code',
       'client_id' => '3',
-      'redirect_uri' => 'http://itemku.productnonspa/callback',
+      'redirect_uri' => $this->productAPI.'callback',
       'scope' => '*',
       'state' => session()->getId()
     ]);
@@ -53,7 +54,7 @@ class UserController extends Controller {
       return redirect('/');
     }
     $token = $request->code;
-    return redirect($this->userAPI.'get_api_key?url=http://itemku.productnonspa/get_user&code='.$token);
+    return redirect($this->userAPI.'get_api_key?url='.$this->productAPI.'get_user&code='.$token);
   }
 
   public function getUser(Request $request) {
